@@ -112,7 +112,7 @@ typedef unsigned int uint;
 #define RETRO_GAMEPLATFORM (RETRO_STANDARD)
 #endif
 
-#define RETRO_USING_OPENGL (1)
+#define RETRO_USING_OPENGL (0)
 
 #if RETRO_USING_OPENGL
 #if RETRO_PLATFORM == RETRO_ANDROID
