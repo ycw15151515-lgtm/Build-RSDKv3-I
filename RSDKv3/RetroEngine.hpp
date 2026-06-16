@@ -8,7 +8,7 @@
 // be set to true only for preservation purposes
 #define RETRO_USE_ORIGINAL_CODE (0)
 
-#define RETRO_USE_MOD_LOADER (!RETRO_USE_ORIGINAL_CODE && 1)
+#define RETRO_USE_MOD_LOADER (1)
 
 // ================
 // STANDARD LIBS
