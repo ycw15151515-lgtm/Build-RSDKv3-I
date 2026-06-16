@@ -173,7 +173,25 @@ jobs:
             --disable-shared --enable-static --disable-examples --disable-encode --disable-oggtest --disable-vorbistest
           find . -name "libtool" -exec sed -i '' 's/-force_cpusubtype_ALL//g' {} + 2>/dev/null || true
           make -j$(sysctl -n hw.ncpu) && make install
+       - name: Build tinyxml2
+         run: |
+           curl -L "https://github.com/leethomason/tinyxml2/archive/refs/tags/9.0.0.tar.gz" -o tinyxml2.tar.gz
+           tar xzf tinyxml2.tar.gz && cd tinyxml2-9.0.0
+           mkdir build-ios && cd build-ios
+           cmake .. -DCMAKE_SYSTEM_NAME=iOS \
+             -DCMAKE_OSX_DEPLOYMENT_TARGET=13.0 \
+             -DCMAKE_OSX_ARCHITECTURES=arm64 \
+             -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/ios-deps" \
+             -DBUILD_SHARED_LIBS=OFF
+           cmake --build . --config Release -j$(sysctl -n hw.ncpu)
+           cmake --install . --config Release
+           
+           # Create tinyxml2 framework
+           mkdir -p dependencies/ios/tinyxml2.framework/Headers
+           cp ../tinyxml2.h dependencies/ios/tinyxml2.framework/Headers/
+           cp install/lib/libtinyxml2.a dependencies/ios/tinyxml2.framework/tinyxml2 || cp lib/libtinyxml2.a dependencies/ios/tinyxml2.framework/tinyxml2
 
+       - name: Create frameworks
       - name: Build SDL2
         run: |
           curl -L "https://libsdl.org/release/SDL2-2.30.7.tar.gz" -o SDL2.tar.gz
