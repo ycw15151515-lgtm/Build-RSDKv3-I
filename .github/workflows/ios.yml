@@ -3,7 +3,7 @@ on: [push, workflow_dispatch]
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-14
     env:
       CFLAGS_IOS: "-arch arm64 -miphoneos-version-min=13.0"
     steps:
