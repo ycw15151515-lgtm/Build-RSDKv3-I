@@ -189,13 +189,6 @@ jobs:
        
       - name: Create frameworks
         run: |
-          mkdir -p dependencies/ios/Ogg.framework/Headers
-          cp ios-deps/include/ogg/*.h dependencies/ios/Ogg.framework/Headers/
-          cp ios-deps/lib/libogg.a dependencies/ios/Ogg.framework/Ogg
-
-          mkdir -p dependencies/ios/tinyxml2.framework/Headers
-          cp RSDKv3/dependencies/all/tinyxml2/tinyxml2.h dependencies/ios/tinyxml2.framework/Headers/
-          cp ios-deps/lib/libtinyxml2.a dependencies/ios/tinyxml2.framework/tinyxml2
 
           mkdir -p dependencies/ios/Vorbis.framework/Headers
           cp ios-deps/include/vorbis/*.h dependencies/ios/Vorbis.framework/Headers/
