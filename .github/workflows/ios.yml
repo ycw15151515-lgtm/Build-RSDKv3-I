@@ -186,19 +186,6 @@ jobs:
             -DSDL_SHARED=OFF -DSDL_STATIC=ON -DSDL_TEST=OFF
           cmake --build . --config Release -j$(sysctl -n hw.ncpu)
           cmake --install . --config Release
-          
-      - name: Build tinyxml2
-        run: |
-          TINYXML2_PATH="$GITHUB_WORKSPACE/RSDKv3/dependencies/all/tinyxml2"
-          mkdir -p "$GITHUB_WORKSPACE/ios-deps/lib"
-          
-          # Compile tinyxml2.cpp for iOS ARM64
-          xcrun -sdk iphoneos clang++ -arch arm64 -std=gnu++14 \
-            -miphoneos-version-min=13.0 -isysroot $SDK_PATH \
-            -c "$TINYXML2_PATH/tinyxml2.cpp" -o /tmp/tinyxml2.o
-          
-          # Create static library
-          ar rcs "$GITHUB_WORKSPACE/ios-deps/lib/libtinyxml2.a" /tmp/tinyxml2.o
        
       - name: Create frameworks
         run: |
